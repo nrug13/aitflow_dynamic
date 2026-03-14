@@ -1,0 +1,538 @@
+[2026-03-14T12:41:36.262+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-03-14T12:41:36.318+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: delta_vacuum_dynamic.run_vacuum manual__2026-03-14T12:41:33.648082+00:00 map_index=0 [queued]>
+[2026-03-14T12:41:36.338+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: delta_vacuum_dynamic.run_vacuum manual__2026-03-14T12:41:33.648082+00:00 map_index=0 [queued]>
+[2026-03-14T12:41:36.339+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2026-03-14T12:41:36.370+0000] {taskinstance.py:2890} INFO - Executing <Mapped(_PythonDecoratedOperator): run_vacuum> on 2026-03-14 12:41:33.648082+00:00
+[2026-03-14T12:41:36.394+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'delta_vacuum_dynamic', 'run_vacuum', 'manual__2026-03-14T12:41:33.648082+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/delta_vacuum_dynamic.py', '--cfg-path', '/tmp/tmp1ovln25w', '--map-index', '0']
+[2026-03-14T12:41:36.398+0000] {standard_task_runner.py:105} INFO - Job 7: Subtask run_vacuum
+[2026-03-14T12:41:36.401+0000] {logging_mixin.py:190} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=425) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-03-14T12:41:36.403+0000] {standard_task_runner.py:72} INFO - Started process 468 to run task
+[2026-03-14T12:41:36.553+0000] {task_command.py:467} INFO - Running <TaskInstance: delta_vacuum_dynamic.run_vacuum manual__2026-03-14T12:41:33.648082+00:00 map_index=0 [running]> on host bde7b8b768fc
+[2026-03-14T12:41:36.763+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='delta_vacuum_dynamic' AIRFLOW_CTX_TASK_ID='run_vacuum' AIRFLOW_CTX_EXECUTION_DATE='2026-03-14T12:41:33.648082+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-03-14T12:41:33.648082+00:00'
+[2026-03-14T12:41:36.768+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2026-03-14T12:41:36.772+0000] {logging_mixin.py:190} INFO - Running: spark-submit --master local[*] --name vacuum_orders /opt/***/dags/scripts/vacuum_delta.py --delta_path s3a://lakehouse/bronze/orders --retention_hours 168
+[2026-03-14T12:41:50.344+0000] {logging_mixin.py:190} INFO - Traceback (most recent call last):
+  File "/opt/***/dags/scripts/vacuum_delta.py", line 44, in <module>
+    delta_table = DeltaTable.forPath(spark, args.delta_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/***/.local/lib/python3.12/site-packages/delta/tables.py", line 387, in forPath
+    jdt = jvm.io.delta.tables.DeltaTable.forPath(jsparkSession, path, hadoopConf)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'JavaPackage' object is not callable
+[2026-03-14T12:41:50.344+0000] {logging_mixin.py:190} INFO - 26/03/14 12:41:45 INFO SparkContext: Running Spark version 3.5.6
+26/03/14 12:41:45 INFO SparkContext: OS info Linux, 6.17.7-300.fc43.x86_64, amd64
+26/03/14 12:41:45 INFO SparkContext: Java version 17.0.18
+26/03/14 12:41:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/03/14 12:41:45 INFO ResourceUtils: ==============================================================
+26/03/14 12:41:45 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/03/14 12:41:45 INFO ResourceUtils: ==============================================================
+26/03/14 12:41:45 INFO SparkContext: Submitted application: delta_vacuum
+26/03/14 12:41:46 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/03/14 12:41:46 INFO ResourceProfile: Limiting resource is cpu
+26/03/14 12:41:46 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/03/14 12:41:46 INFO SecurityManager: Changing view acls to: ***
+26/03/14 12:41:46 INFO SecurityManager: Changing modify acls to: ***
+26/03/14 12:41:46 INFO SecurityManager: Changing view acls groups to: 
+26/03/14 12:41:46 INFO SecurityManager: Changing modify acls groups to: 
+26/03/14 12:41:46 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: ***; groups with view permissions: EMPTY; users with modify permissions: ***; groups with modify permissions: EMPTY
+26/03/14 12:41:46 INFO Utils: Successfully started service 'sparkDriver' on port 43761.
+26/03/14 12:41:46 INFO SparkEnv: Registering MapOutputTracker
+26/03/14 12:41:46 INFO SparkEnv: Registering BlockManagerMaster
+26/03/14 12:41:46 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/03/14 12:41:46 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/03/14 12:41:46 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/03/14 12:41:46 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-5129b192-9552-4a66-817a-079938d5d3c5
+26/03/14 12:41:46 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/03/14 12:41:46 INFO SparkEnv: Registering OutputCommitCoordinator
+26/03/14 12:41:47 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/03/14 12:41:47 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+26/03/14 12:41:47 INFO Utils: Successfully started service 'SparkUI' on port 4041.
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/delta-spark_2.12-3.1.0.jar at spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/delta-storage-3.1.0.jar at spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/antlr4-runtime-4.9.3.jar at spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/hadoop-aws-3.3.4.jar at spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar at spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO Executor: Starting executor ID driver on host bde7b8b768fc
+26/03/14 12:41:47 INFO Executor: OS info Linux, 6.17.7-300.fc43.x86_64, amd64
+26/03/14 12:41:47 INFO Executor: Java version 17.0.18
+26/03/14 12:41:47 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/03/14 12:41:47 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@23e808e1 for default.
+26/03/14 12:41:47 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO TransportClientFactory: Successfully created connection to bde7b8b768fc/172.26.0.4:43761 after 50 ms (0 ms spent in bootstraps)
+26/03/14 12:41:47 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp2359406868429165876.tmp
+26/03/14 12:41:47 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/antlr4-runtime-4.9.3.jar to class loader default
+26/03/14 12:41:47 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp15456063623001640185.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/aws-java-sdk-bundle-1.12.262.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp16325038194610692937.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/delta-storage-3.1.0.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp582656353728479534.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/delta-spark_2.12-3.1.0.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp6517260948222334553.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/hadoop-aws-3.3.4.jar to class loader default
+26/03/14 12:41:49 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 44447.
+26/03/14 12:41:49 INFO NettyBlockTransferService: Server created on bde7b8b768fc:44447
+26/03/14 12:41:49 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/03/14 12:41:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManagerMasterEndpoint: Registering block manager bde7b8b768fc:44447 with 434.4 MiB RAM, BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:50 WARN SparkSession: Cannot use io.delta.sql.DeltaSparkSessionExtension to configure session extensions.
+java.lang.ClassNotFoundException: io.delta.sql.DeltaSparkSessionExtension
+	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:469)
+	at org.apache.spark.util.SparkClassUtils.classForName(SparkClassUtils.scala:41)
+	at org.apache.spark.util.SparkClassUtils.classForName$(SparkClassUtils.scala:36)
+	at org.apache.spark.util.Utils$.classForName(Utils.scala:94)
+	at org.apache.spark.sql.SparkSession$.$anonfun$applyExtensions$2(SparkSession.scala:1367)
+	at org.apache.spark.sql.SparkSession$.$anonfun$applyExtensions$2$adapted(SparkSession.scala:1365)
+	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+	at org.apache.spark.sql.SparkSession$.org$apache$spark$sql$SparkSession$$applyExtensions(SparkSession.scala:1365)
+	at org.apache.spark.sql.SparkSession.<init>(SparkSession.scala:105)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+26/03/14 12:41:50 INFO SparkContext: Invoking stop() from shutdown hook
+26/03/14 12:41:50 INFO SparkContext: SparkContext is stopping with exitCode 0.
+26/03/14 12:41:50 INFO SparkUI: Stopped Spark web UI at http://bde7b8b768fc:4041
+26/03/14 12:41:50 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+26/03/14 12:41:50 INFO MemoryStore: MemoryStore cleared
+26/03/14 12:41:50 INFO BlockManager: BlockManager stopped
+26/03/14 12:41:50 INFO BlockManagerMaster: BlockManagerMaster stopped
+26/03/14 12:41:50 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+26/03/14 12:41:50 INFO SparkContext: Successfully stopped SparkContext
+26/03/14 12:41:50 INFO ShutdownHookManager: Shutdown hook called
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/pyspark-38f92478-4187-4237-9dca-72dcac6b00d6
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-c1291eba-28af-46f2-b327-777415b7644b
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532
+[2026-03-14T12:41:50.345+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/delta_vacuum_dynamic.py", line 44, in run_vacuum
+    raise Exception(
+Exception: Vacuum failed for orders: 26/03/14 12:41:45 INFO SparkContext: Running Spark version 3.5.6
+26/03/14 12:41:45 INFO SparkContext: OS info Linux, 6.17.7-300.fc43.x86_64, amd64
+26/03/14 12:41:45 INFO SparkContext: Java version 17.0.18
+26/03/14 12:41:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/03/14 12:41:45 INFO ResourceUtils: ==============================================================
+26/03/14 12:41:45 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/03/14 12:41:45 INFO ResourceUtils: ==============================================================
+26/03/14 12:41:45 INFO SparkContext: Submitted application: delta_vacuum
+26/03/14 12:41:46 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/03/14 12:41:46 INFO ResourceProfile: Limiting resource is cpu
+26/03/14 12:41:46 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/03/14 12:41:46 INFO SecurityManager: Changing view acls to: ***
+26/03/14 12:41:46 INFO SecurityManager: Changing modify acls to: ***
+26/03/14 12:41:46 INFO SecurityManager: Changing view acls groups to: 
+26/03/14 12:41:46 INFO SecurityManager: Changing modify acls groups to: 
+26/03/14 12:41:46 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: ***; groups with view permissions: EMPTY; users with modify permissions: ***; groups with modify permissions: EMPTY
+26/03/14 12:41:46 INFO Utils: Successfully started service 'sparkDriver' on port 43761.
+26/03/14 12:41:46 INFO SparkEnv: Registering MapOutputTracker
+26/03/14 12:41:46 INFO SparkEnv: Registering BlockManagerMaster
+26/03/14 12:41:46 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/03/14 12:41:46 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/03/14 12:41:46 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/03/14 12:41:46 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-5129b192-9552-4a66-817a-079938d5d3c5
+26/03/14 12:41:46 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/03/14 12:41:46 INFO SparkEnv: Registering OutputCommitCoordinator
+26/03/14 12:41:47 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/03/14 12:41:47 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+26/03/14 12:41:47 INFO Utils: Successfully started service 'SparkUI' on port 4041.
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/delta-spark_2.12-3.1.0.jar at spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/delta-storage-3.1.0.jar at spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/antlr4-runtime-4.9.3.jar at spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/hadoop-aws-3.3.4.jar at spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar at spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO Executor: Starting executor ID driver on host bde7b8b768fc
+26/03/14 12:41:47 INFO Executor: OS info Linux, 6.17.7-300.fc43.x86_64, amd64
+26/03/14 12:41:47 INFO Executor: Java version 17.0.18
+26/03/14 12:41:47 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/03/14 12:41:47 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@23e808e1 for default.
+26/03/14 12:41:47 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO TransportClientFactory: Successfully created connection to bde7b8b768fc/172.26.0.4:43761 after 50 ms (0 ms spent in bootstraps)
+26/03/14 12:41:47 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp2359406868429165876.tmp
+26/03/14 12:41:47 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/antlr4-runtime-4.9.3.jar to class loader default
+26/03/14 12:41:47 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp15456063623001640185.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/aws-java-sdk-bundle-1.12.262.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp16325038194610692937.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/delta-storage-3.1.0.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp582656353728479534.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/delta-spark_2.12-3.1.0.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp6517260948222334553.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/hadoop-aws-3.3.4.jar to class loader default
+26/03/14 12:41:49 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 44447.
+26/03/14 12:41:49 INFO NettyBlockTransferService: Server created on bde7b8b768fc:44447
+26/03/14 12:41:49 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/03/14 12:41:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManagerMasterEndpoint: Registering block manager bde7b8b768fc:44447 with 434.4 MiB RAM, BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:50 WARN SparkSession: Cannot use io.delta.sql.DeltaSparkSessionExtension to configure session extensions.
+java.lang.ClassNotFoundException: io.delta.sql.DeltaSparkSessionExtension
+	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:469)
+	at org.apache.spark.util.SparkClassUtils.classForName(SparkClassUtils.scala:41)
+	at org.apache.spark.util.SparkClassUtils.classForName$(SparkClassUtils.scala:36)
+	at org.apache.spark.util.Utils$.classForName(Utils.scala:94)
+	at org.apache.spark.sql.SparkSession$.$anonfun$applyExtensions$2(SparkSession.scala:1367)
+	at org.apache.spark.sql.SparkSession$.$anonfun$applyExtensions$2$adapted(SparkSession.scala:1365)
+	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+	at org.apache.spark.sql.SparkSession$.org$apache$spark$sql$SparkSession$$applyExtensions(SparkSession.scala:1365)
+	at org.apache.spark.sql.SparkSession.<init>(SparkSession.scala:105)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+26/03/14 12:41:50 INFO SparkContext: Invoking stop() from shutdown hook
+26/03/14 12:41:50 INFO SparkContext: SparkContext is stopping with exitCode 0.
+26/03/14 12:41:50 INFO SparkUI: Stopped Spark web UI at http://bde7b8b768fc:4041
+26/03/14 12:41:50 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+26/03/14 12:41:50 INFO MemoryStore: MemoryStore cleared
+26/03/14 12:41:50 INFO BlockManager: BlockManager stopped
+26/03/14 12:41:50 INFO BlockManagerMaster: BlockManagerMaster stopped
+26/03/14 12:41:50 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+26/03/14 12:41:50 INFO SparkContext: Successfully stopped SparkContext
+26/03/14 12:41:50 INFO ShutdownHookManager: Shutdown hook called
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/pyspark-38f92478-4187-4237-9dca-72dcac6b00d6
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-c1291eba-28af-46f2-b327-777415b7644b
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532
+
+[2026-03-14T12:41:50.367+0000] {taskinstance.py:1226} INFO - Marking task as FAILED. dag_id=delta_vacuum_dynamic, task_id=run_vacuum, run_id=manual__2026-03-14T12:41:33.648082+00:00, map_index=0, execution_date=20260314T124133, start_date=20260314T124136, end_date=20260314T124150
+[2026-03-14T12:41:50.417+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2026-03-14T12:41:50.417+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 7 for task run_vacuum (Vacuum failed for orders: 26/03/14 12:41:45 INFO SparkContext: Running Spark version 3.5.6
+26/03/14 12:41:45 INFO SparkContext: OS info Linux, 6.17.7-300.fc43.x86_64, amd64
+26/03/14 12:41:45 INFO SparkContext: Java version 17.0.18
+26/03/14 12:41:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/03/14 12:41:45 INFO ResourceUtils: ==============================================================
+26/03/14 12:41:45 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/03/14 12:41:45 INFO ResourceUtils: ==============================================================
+26/03/14 12:41:45 INFO SparkContext: Submitted application: delta_vacuum
+26/03/14 12:41:46 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/03/14 12:41:46 INFO ResourceProfile: Limiting resource is cpu
+26/03/14 12:41:46 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/03/14 12:41:46 INFO SecurityManager: Changing view acls to: ***
+26/03/14 12:41:46 INFO SecurityManager: Changing modify acls to: ***
+26/03/14 12:41:46 INFO SecurityManager: Changing view acls groups to: 
+26/03/14 12:41:46 INFO SecurityManager: Changing modify acls groups to: 
+26/03/14 12:41:46 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: ***; groups with view permissions: EMPTY; users with modify permissions: ***; groups with modify permissions: EMPTY
+26/03/14 12:41:46 INFO Utils: Successfully started service 'sparkDriver' on port 43761.
+26/03/14 12:41:46 INFO SparkEnv: Registering MapOutputTracker
+26/03/14 12:41:46 INFO SparkEnv: Registering BlockManagerMaster
+26/03/14 12:41:46 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/03/14 12:41:46 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/03/14 12:41:46 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/03/14 12:41:46 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-5129b192-9552-4a66-817a-079938d5d3c5
+26/03/14 12:41:46 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/03/14 12:41:46 INFO SparkEnv: Registering OutputCommitCoordinator
+26/03/14 12:41:47 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/03/14 12:41:47 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+26/03/14 12:41:47 INFO Utils: Successfully started service 'SparkUI' on port 4041.
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/delta-spark_2.12-3.1.0.jar at spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/delta-storage-3.1.0.jar at spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/antlr4-runtime-4.9.3.jar at spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/hadoop-aws-3.3.4.jar at spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar at spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO Executor: Starting executor ID driver on host bde7b8b768fc
+26/03/14 12:41:47 INFO Executor: OS info Linux, 6.17.7-300.fc43.x86_64, amd64
+26/03/14 12:41:47 INFO Executor: Java version 17.0.18
+26/03/14 12:41:47 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/03/14 12:41:47 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@23e808e1 for default.
+26/03/14 12:41:47 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO TransportClientFactory: Successfully created connection to bde7b8b768fc/172.26.0.4:43761 after 50 ms (0 ms spent in bootstraps)
+26/03/14 12:41:47 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp2359406868429165876.tmp
+26/03/14 12:41:47 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/antlr4-runtime-4.9.3.jar to class loader default
+26/03/14 12:41:47 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp15456063623001640185.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/aws-java-sdk-bundle-1.12.262.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp16325038194610692937.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/delta-storage-3.1.0.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp582656353728479534.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/delta-spark_2.12-3.1.0.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp6517260948222334553.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/hadoop-aws-3.3.4.jar to class loader default
+26/03/14 12:41:49 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 44447.
+26/03/14 12:41:49 INFO NettyBlockTransferService: Server created on bde7b8b768fc:44447
+26/03/14 12:41:49 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/03/14 12:41:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManagerMasterEndpoint: Registering block manager bde7b8b768fc:44447 with 434.4 MiB RAM, BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:50 WARN SparkSession: Cannot use io.delta.sql.DeltaSparkSessionExtension to configure session extensions.
+java.lang.ClassNotFoundException: io.delta.sql.DeltaSparkSessionExtension
+	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:469)
+	at org.apache.spark.util.SparkClassUtils.classForName(SparkClassUtils.scala:41)
+	at org.apache.spark.util.SparkClassUtils.classForName$(SparkClassUtils.scala:36)
+	at org.apache.spark.util.Utils$.classForName(Utils.scala:94)
+	at org.apache.spark.sql.SparkSession$.$anonfun$applyExtensions$2(SparkSession.scala:1367)
+	at org.apache.spark.sql.SparkSession$.$anonfun$applyExtensions$2$adapted(SparkSession.scala:1365)
+	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+	at org.apache.spark.sql.SparkSession$.org$apache$spark$sql$SparkSession$$applyExtensions(SparkSession.scala:1365)
+	at org.apache.spark.sql.SparkSession.<init>(SparkSession.scala:105)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+26/03/14 12:41:50 INFO SparkContext: Invoking stop() from shutdown hook
+26/03/14 12:41:50 INFO SparkContext: SparkContext is stopping with exitCode 0.
+26/03/14 12:41:50 INFO SparkUI: Stopped Spark web UI at http://bde7b8b768fc:4041
+26/03/14 12:41:50 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+26/03/14 12:41:50 INFO MemoryStore: MemoryStore cleared
+26/03/14 12:41:50 INFO BlockManager: BlockManager stopped
+26/03/14 12:41:50 INFO BlockManagerMaster: BlockManagerMaster stopped
+26/03/14 12:41:50 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+26/03/14 12:41:50 INFO SparkContext: Successfully stopped SparkContext
+26/03/14 12:41:50 INFO ShutdownHookManager: Shutdown hook called
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/pyspark-38f92478-4187-4237-9dca-72dcac6b00d6
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-c1291eba-28af-46f2-b327-777415b7644b
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532
+; 468)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/delta_vacuum_dynamic.py", line 44, in run_vacuum
+    raise Exception(
+Exception: Vacuum failed for orders: 26/03/14 12:41:45 INFO SparkContext: Running Spark version 3.5.6
+26/03/14 12:41:45 INFO SparkContext: OS info Linux, 6.17.7-300.fc43.x86_64, amd64
+26/03/14 12:41:45 INFO SparkContext: Java version 17.0.18
+26/03/14 12:41:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+26/03/14 12:41:45 INFO ResourceUtils: ==============================================================
+26/03/14 12:41:45 INFO ResourceUtils: No custom resources configured for spark.driver.
+26/03/14 12:41:45 INFO ResourceUtils: ==============================================================
+26/03/14 12:41:45 INFO SparkContext: Submitted application: delta_vacuum
+26/03/14 12:41:46 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+26/03/14 12:41:46 INFO ResourceProfile: Limiting resource is cpu
+26/03/14 12:41:46 INFO ResourceProfileManager: Added ResourceProfile id: 0
+26/03/14 12:41:46 INFO SecurityManager: Changing view acls to: ***
+26/03/14 12:41:46 INFO SecurityManager: Changing modify acls to: ***
+26/03/14 12:41:46 INFO SecurityManager: Changing view acls groups to: 
+26/03/14 12:41:46 INFO SecurityManager: Changing modify acls groups to: 
+26/03/14 12:41:46 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: ***; groups with view permissions: EMPTY; users with modify permissions: ***; groups with modify permissions: EMPTY
+26/03/14 12:41:46 INFO Utils: Successfully started service 'sparkDriver' on port 43761.
+26/03/14 12:41:46 INFO SparkEnv: Registering MapOutputTracker
+26/03/14 12:41:46 INFO SparkEnv: Registering BlockManagerMaster
+26/03/14 12:41:46 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+26/03/14 12:41:46 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+26/03/14 12:41:46 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/03/14 12:41:46 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-5129b192-9552-4a66-817a-079938d5d3c5
+26/03/14 12:41:46 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+26/03/14 12:41:46 INFO SparkEnv: Registering OutputCommitCoordinator
+26/03/14 12:41:47 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+26/03/14 12:41:47 WARN Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+26/03/14 12:41:47 INFO Utils: Successfully started service 'SparkUI' on port 4041.
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/delta-spark_2.12-3.1.0.jar at spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/delta-storage-3.1.0.jar at spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/antlr4-runtime-4.9.3.jar at spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/hadoop-aws-3.3.4.jar at spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO SparkContext: Added JAR /opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar at spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO Executor: Starting executor ID driver on host bde7b8b768fc
+26/03/14 12:41:47 INFO Executor: OS info Linux, 6.17.7-300.fc43.x86_64, amd64
+26/03/14 12:41:47 INFO Executor: Java version 17.0.18
+26/03/14 12:41:47 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+26/03/14 12:41:47 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@23e808e1 for default.
+26/03/14 12:41:47 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO TransportClientFactory: Successfully created connection to bde7b8b768fc/172.26.0.4:43761 after 50 ms (0 ms spent in bootstraps)
+26/03/14 12:41:47 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/antlr4-runtime-4.9.3.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp2359406868429165876.tmp
+26/03/14 12:41:47 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/antlr4-runtime-4.9.3.jar to class loader default
+26/03/14 12:41:47 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar with timestamp 1773492105673
+26/03/14 12:41:47 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/aws-java-sdk-bundle-1.12.262.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp15456063623001640185.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/aws-java-sdk-bundle-1.12.262.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/delta-storage-3.1.0.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp16325038194610692937.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/delta-storage-3.1.0.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/delta-spark_2.12-3.1.0.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp582656353728479534.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/delta-spark_2.12-3.1.0.jar to class loader default
+26/03/14 12:41:49 INFO Executor: Fetching spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar with timestamp 1773492105673
+26/03/14 12:41:49 INFO Utils: Fetching spark://bde7b8b768fc:43761/jars/hadoop-aws-3.3.4.jar to /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/fetchFileTemp6517260948222334553.tmp
+26/03/14 12:41:49 INFO Executor: Adding file:/tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/userFiles-83f039c6-7ded-423d-a3ea-e903e1b32ba4/hadoop-aws-3.3.4.jar to class loader default
+26/03/14 12:41:49 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 44447.
+26/03/14 12:41:49 INFO NettyBlockTransferService: Server created on bde7b8b768fc:44447
+26/03/14 12:41:49 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+26/03/14 12:41:49 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManagerMasterEndpoint: Registering block manager bde7b8b768fc:44447 with 434.4 MiB RAM, BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:49 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, bde7b8b768fc, 44447, None)
+26/03/14 12:41:50 WARN SparkSession: Cannot use io.delta.sql.DeltaSparkSessionExtension to configure session extensions.
+java.lang.ClassNotFoundException: io.delta.sql.DeltaSparkSessionExtension
+	at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:445)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:469)
+	at org.apache.spark.util.SparkClassUtils.classForName(SparkClassUtils.scala:41)
+	at org.apache.spark.util.SparkClassUtils.classForName$(SparkClassUtils.scala:36)
+	at org.apache.spark.util.Utils$.classForName(Utils.scala:94)
+	at org.apache.spark.sql.SparkSession$.$anonfun$applyExtensions$2(SparkSession.scala:1367)
+	at org.apache.spark.sql.SparkSession$.$anonfun$applyExtensions$2$adapted(SparkSession.scala:1365)
+	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
+	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
+	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
+	at org.apache.spark.sql.SparkSession$.org$apache$spark$sql$SparkSession$$applyExtensions(SparkSession.scala:1365)
+	at org.apache.spark.sql.SparkSession.<init>(SparkSession.scala:105)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:247)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:238)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:80)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:69)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+26/03/14 12:41:50 INFO SparkContext: Invoking stop() from shutdown hook
+26/03/14 12:41:50 INFO SparkContext: SparkContext is stopping with exitCode 0.
+26/03/14 12:41:50 INFO SparkUI: Stopped Spark web UI at http://bde7b8b768fc:4041
+26/03/14 12:41:50 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+26/03/14 12:41:50 INFO MemoryStore: MemoryStore cleared
+26/03/14 12:41:50 INFO BlockManager: BlockManager stopped
+26/03/14 12:41:50 INFO BlockManagerMaster: BlockManagerMaster stopped
+26/03/14 12:41:50 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+26/03/14 12:41:50 INFO SparkContext: Successfully stopped SparkContext
+26/03/14 12:41:50 INFO ShutdownHookManager: Shutdown hook called
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532/pyspark-38f92478-4187-4237-9dca-72dcac6b00d6
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-c1291eba-28af-46f2-b327-777415b7644b
+26/03/14 12:41:50 INFO ShutdownHookManager: Deleting directory /tmp/spark-ae16cf3e-ec5a-4d44-90ef-c80a1cf2a532
+
+[2026-03-14T12:41:50.445+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2026-03-14T12:41:50.469+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-03-14T12:41:50.471+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
